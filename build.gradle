@@ -75,5 +75,6 @@ codenarc {
 }
 
 codenarcTest {
+    configFile = file('codenarc.groovy')
     ignoreFailures = true
 }
