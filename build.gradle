@@ -66,8 +66,3 @@ codenarc {
     maxPriority3Violations = 321
     reportFormat = 'html'
 }
-
-codenarcTest {
-    configFile = file('codenarc.groovy')
-    ignoreFailures = true
-}
