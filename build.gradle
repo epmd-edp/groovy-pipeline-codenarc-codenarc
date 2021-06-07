@@ -16,12 +16,6 @@ jacocoTestReport {
 		xml.destination file("${buildDir}/reports/jacoco.xml")
 	}
 }
-
-sonarqube {
-	properties {
-		property 'sonar.coverage.jacoco.xmlReportPaths', "${buildDir}/reports/jacoco.xml"
-	}
-}
 	
 group = 'epam.edp'
 version = '0.0.1-SNAPSHOT'
