@@ -1,0 +1,1 @@
+# groovy-pipeline-codenarc-gradle
