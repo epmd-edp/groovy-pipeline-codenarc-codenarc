@@ -1,72 +1,18 @@
-plugins {
-	id 'org.springframework.boot' version '2.1.0.RELEASE'
-	id 'codenarc'
-}
+apply plugin: 'groovy'
+apply plugin: 'codenarc'
 
-
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
-apply plugin: 'jacoco'
-
-
-jacocoTestReport {
-	reports {
-		xml.enabled true
-		xml.destination file("${buildDir}/reports/jacoco.xml")
-	}
-}
-	
-group = 'epam.edp'
-version = '0.0.1-SNAPSHOT'
-
-description = """"""
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-tasks.withType(JavaCompile) {
-	options.encoding = 'UTF-8'
-}
-
-bootJar {
-	mainClassName "com.epam.edp.demo.DemoApplication"
-}
-
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			from components.java
-		}
-	}
-	repositories {
-		maven {
-			credentials {
-				username nexusLogin
-				password nexusPassword
-			}
-			url "${nexusMavenRepositoryUrl}"
-		}
-	}
-}
-
-repositories {  
-     maven { url "https://repo.maven.apache.org/maven2" }
+repositories {
+    mavenCentral()
 }
 
 dependencies {
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.0.1.RELEASE'
-    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.0.1.RELEASE'
+    compile 'org.codehaus.groovy:groovy-all:2.4.7'
+
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'junit:junit:4.12'
 }
 
 codenarc {
-    toolVersion = '1.5'
-    configFile = file('codenarc.groovy')
-    maxPriority1Violations = 0
-    maxPriority2Violations = 0
-    maxPriority3Violations = 321
-    reportFormat = 'html'
-}
-
-codenarcTest {
     ignoreFailures = true
+    configFile = new File('config/codenarc/codenarc.groovy')
 }
