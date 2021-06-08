@@ -66,3 +66,7 @@ codenarc {
     maxPriority3Violations = 321
     reportFormat = 'html'
 }
+
+codenarcTest {
+    ignoreFailures = true
+}
