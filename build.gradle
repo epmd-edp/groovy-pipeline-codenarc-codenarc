@@ -1,13 +1,14 @@
-apply plugin: 'groovy'
-apply plugin: 'codenarc'
-apply plugin: 'jacoco'
-apply plugin: 'org.sonarqube'
-
+plugins {
+  id 'groovy'
+  id 'codenarc'
+  id 'jacoco'
+  id 'org.sonarqube' version '5.1.0.4882'
+}
 
 jacocoTestReport {
 	reports {
-		xml.enabled true
-		xml.destination file("${buildDir}/reports/jacoco.xml")
+		xml.required = true
+		xml.outputLocation = layout.buildDirectory.file("reports/jacoco.xml")
 	}
 }
 
@@ -25,10 +26,17 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.codehaus.groovy:groovy-all:2.4.7'
+    implementation 'org.apache.groovy:groovy:4.0.28'
 }
 
 codenarc {
+    toolVersion = '3.6.0-groovy-4.0'
     ignoreFailures = true
-    configFile = new File('config/codenarc/codenarc.groovy')
+    configFile = file('config/codenarc/codenarc.groovy')
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
 }
